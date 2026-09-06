@@ -1,0 +1,28 @@
+{
+  "methodology": {
+    "total_jobs": 300,
+    "concurrency": 20,
+    "forced_failure_rate": 0.05,
+    "poll_interval_s": 0.15,
+    "job_mix": "70% prime_calc / 30% image_resize"
+  },
+  "wall_clock_seconds": 67.73,
+  "throughput_jobs_per_sec": 4.43,
+  "outcomes": {
+    "succeeded": 281,
+    "dead_lettered": 19,
+    "other": 0,
+    "failure_rate_pct": 6.33
+  },
+  "submit_latency_ms": {
+    "p50": 106.4,
+    "p95": 640.9300000000003,
+    "p99": 827.736699999999
+  },
+  "processing_latency_ms": {
+    "p50": 3911.835,
+    "p95": 9117.6335,
+    "p99": 10790.043399999993,
+    "max": 12779.44
+  }
+}

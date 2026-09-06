@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 2s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "api"
+    static_configs:
+      - targets: ["localhost:8000"]
+
+  - job_name: "workers"
+    static_configs:
+      - targets:
+          - "localhost:9101"
+          - "localhost:9102"
+          - "localhost:9103"
+        labels:
+          pool: "worker-pool"

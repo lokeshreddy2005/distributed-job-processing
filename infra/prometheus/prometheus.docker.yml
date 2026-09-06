@@ -1,0 +1,31 @@
+# Reference Prometheus config for the docker-compose.yml path (NOT the
+# config actually used in this project — that's prometheus.yml in this same
+# directory, targeting the local-process ports on localhost). This file is
+# provided so the docker-compose.yml setup is runnable in an environment
+# that has Docker, not because it was exercised here.
+#
+# Note: with `deploy: replicas: 3` and no swarm/orchestrator-level service
+# discovery, Compose's embedded DNS round-robins requests to "worker" across
+# replicas rather than exposing each one individually, so a static target
+# here only reliably reaches one replica at a time. A real multi-replica
+# deployment would use Prometheus's Docker Swarm SD, a Consul/DNS-based SD,
+# or (per this project's own "future work") a Kubernetes ServiceMonitor —
+# all explicitly out of scope for this project. This config is therefore
+# illustrative for the single-node docker-compose case, not a claim of
+# correctness at N replicas.
+global:
+  scrape_interval: 2s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "api"
+    static_configs:
+      - targets: ["api:8000"]
+
+  - job_name: "workers"
+    static_configs:
+      - targets: ["worker:9101"]

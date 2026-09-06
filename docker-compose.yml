@@ -7,8 +7,9 @@
 # run the "normal" containerized way elsewhere; it has not been exercised in
 # this environment.
 #
-# POSTGRES_PASSWORD is read from the environment (see .env.example) rather
-# than hardcoded, so no credential-shaped string lives in this file.
+# POSTGRES_PASSWORD is required from the environment (see .env.example) -
+# `docker compose up` fails fast with a clear message if it isn't set,
+# rather than falling back to any hardcoded/default-looking value here.
 version: "3.9"
 
 services:
@@ -25,7 +26,7 @@ services:
     image: postgres:16-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env, see .env.example}
       POSTGRES_DB: jobsdb
     ports: ["5432:5432"]
     healthcheck:
@@ -50,7 +51,7 @@ services:
       REDIS_PORT: 6379
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env, see .env.example}
     ports: ["8000:8000"]
     depends_on:
       redis: { condition: service_healthy }
@@ -65,7 +66,7 @@ services:
       REDIS_PORT: 6379
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env, see .env.example}
       WORKER_METRICS_BASE_PORT: 9101
     deploy:
       replicas: 3

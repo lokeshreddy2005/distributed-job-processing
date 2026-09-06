@@ -1,0 +1,45 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# infra binaries and data (huge, machine-specific — see README.md "Running
+# without Docker" > "Fetch the portable binaries" for exact download commands)
+infra/redis/*.exe
+infra/redis/*.pdb
+infra/redis/*.dll
+infra/redis/00-RELEASENOTES
+infra/redis/README.txt
+infra/redis/RELEASENOTES.txt
+infra/redis/redis.windows*.conf
+infra/redis/dump.rdb
+infra/postgres/pgsql/
+infra/postgres/pgdata/
+infra/postgres/*.log
+infra/prometheus/prometheus.exe
+infra/prometheus/promtool.exe
+infra/prometheus/console_libraries/
+infra/prometheus/consoles/
+infra/prometheus/LICENSE
+infra/prometheus/NOTICE
+infra/prometheus/data/
+
+# runtime data
+run/
+data/uploads/*
+data/results/*
+!data/uploads/.gitkeep
+!data/results/.gitkeep
+*.log
+!docs/*.log
+logs/
+
+# kept locally for personal use only, not part of the pushed project
+docs/INTERVIEW_PREP.md
+
+# experiment output committed selectively — see docs/
+.env
+.pytest_cache/
+.coverage
+htmlcov/

@@ -1,0 +1,6 @@
+{
+  "demo-key-alpha": {"client_name": "alpha-client", "rate_limit_per_minute": 120, "is_admin": false},
+  "demo-key-beta": {"client_name": "beta-client", "rate_limit_per_minute": 60, "is_admin": false},
+  "admin-key-root": {"client_name": "admin", "rate_limit_per_minute": 10000, "is_admin": true},
+  "loadtest-key": {"client_name": "load-test-runner", "rate_limit_per_minute": 100000, "is_admin": false}
+}

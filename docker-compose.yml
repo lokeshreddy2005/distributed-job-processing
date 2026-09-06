@@ -6,6 +6,9 @@
 # this repo. This compose file is provided so the same architecture can be
 # run the "normal" containerized way elsewhere; it has not been exercised in
 # this environment.
+#
+# POSTGRES_PASSWORD is read from the environment (see .env.example) rather
+# than hardcoded, so no credential-shaped string lives in this file.
 version: "3.9"
 
 services:
@@ -22,7 +25,7 @@ services:
     image: postgres:16-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: jobsdb
     ports: ["5432:5432"]
     healthcheck:
@@ -47,7 +50,7 @@ services:
       REDIS_PORT: 6379
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports: ["8000:8000"]
     depends_on:
       redis: { condition: service_healthy }
@@ -62,7 +65,7 @@ services:
       REDIS_PORT: 6379
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       WORKER_METRICS_BASE_PORT: 9101
     deploy:
       replicas: 3

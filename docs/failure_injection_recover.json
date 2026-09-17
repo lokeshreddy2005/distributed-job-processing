@@ -1,0 +1,50 @@
+{
+  "scenario": "recover",
+  "claim_timestamp": "2026-09-04T06:09:14.744+00:00",
+  "kill_timestamp": "2026-09-04T06:09:17.750+00:00",
+  "resolved_timestamp": "2026-09-04T06:09:35.264+00:00",
+  "seconds_from_claim_to_kill": 3.01,
+  "seconds_from_kill_to_resolution": 17.51,
+  "killed_worker": "worker-2",
+  "killed_pid": 26608,
+  "job": {
+    "job_id": "139deff3-63d2-49cf-b37c-4fb29dc46a1f",
+    "final_status": "succeeded",
+    "attempts": 1,
+    "max_retries": 4,
+    "error": null,
+    "result": {
+      "limit": 4000000,
+      "elapsed_ms": 7866.76,
+      "prime_count": 283146
+    }
+  },
+  "side_effect_ledger": {
+    "effect_key": "C:\\Users\\lokes\\OneDrive\\Documents\\SWEE\\Distributed Job Processing\\data\\results\\139deff3-63d2-49cf-b37c-4fb29dc46a1f.prime.json",
+    "result_hash": "bd92c76c8e1c09bb874d366ba98c35b946b48208e8c18945004bd9ab3f8a3823",
+    "write_count": 1
+  },
+  "transitions": [
+    {
+      "timestamp": "2026-09-04T11:39:14.620+05:30",
+      "from_status": "queued",
+      "to_status": "processing",
+      "worker_id": "worker-2",
+      "note": null
+    },
+    {
+      "timestamp": "2026-09-04T11:39:27.226+05:30",
+      "from_status": "processing",
+      "to_status": "processing",
+      "worker_id": "worker-1",
+      "note": "reclaimed after presumed crash of previous worker (retry attempt 1)"
+    },
+    {
+      "timestamp": "2026-09-04T11:39:35.104+05:30",
+      "from_status": "processing",
+      "to_status": "succeeded",
+      "worker_id": "worker-1",
+      "note": "side effect written"
+    }
+  ]
+}

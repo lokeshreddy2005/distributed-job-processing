@@ -1,0 +1,42 @@
+{
+  "scenario": "dlq",
+  "claim_timestamp": "2026-09-04T06:09:57.811+00:00",
+  "kill_timestamp": "2026-09-04T06:10:00.819+00:00",
+  "resolved_timestamp": "2026-09-04T06:10:18.763+00:00",
+  "seconds_from_claim_to_kill": 3.01,
+  "seconds_from_kill_to_resolution": 17.94,
+  "killed_worker": "worker-3",
+  "killed_pid": 22588,
+  "job": {
+    "job_id": "6393842b-4c94-4318-8cf0-b88a0458c403",
+    "final_status": "dead_lettered",
+    "attempts": 2,
+    "max_retries": 1,
+    "error": "prime_calc: forced failure on attempt 2 (after 7674ms of real work)",
+    "result": null
+  },
+  "side_effect_ledger": null,
+  "transitions": [
+    {
+      "timestamp": "2026-09-04T11:39:57.731+05:30",
+      "from_status": "queued",
+      "to_status": "processing",
+      "worker_id": "worker-3",
+      "note": null
+    },
+    {
+      "timestamp": "2026-09-04T11:40:10.898+05:30",
+      "from_status": "processing",
+      "to_status": "processing",
+      "worker_id": "worker-2",
+      "note": "reclaimed after presumed crash of previous worker (retry attempt 1)"
+    },
+    {
+      "timestamp": "2026-09-04T11:40:18.577+05:30",
+      "from_status": "processing",
+      "to_status": "dead_lettered",
+      "worker_id": "worker-2",
+      "note": "exhausted retries (2/1): prime_calc: forced failure on attempt 2 (after 7674ms of real work)"
+    }
+  ]
+}

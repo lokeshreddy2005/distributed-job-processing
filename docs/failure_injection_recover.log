@@ -1,0 +1,24 @@
+[2026-09-04T06:09:12.472+00:00] ======================================================================
+[2026-09-04T06:09:12.472+00:00] FAILURE INJECTION EXPERIMENT — scenario=recover
+[2026-09-04T06:09:12.472+00:00] ======================================================================
+[2026-09-04T06:09:12.472+00:00] background load generator started (filler jobs every 0.4s)
+[2026-09-04T06:09:14.565+00:00] submitted tracked job 139deff3-63d2-49cf-b37c-4fb29dc46a1f (scenario=recover, payload={'limit': 4000000})
+[2026-09-04T06:09:14.565+00:00] waiting for a worker to claim the job (status -> processing)...
+[2026-09-04T06:09:14.744+00:00] job claimed: status=processing worker=worker-2 (t=0.00s, reference point)
+[2026-09-04T06:09:14.749+00:00] resolved worker-2 -> OS pid 26608
+[2026-09-04T06:09:14.749+00:00] sleeping 3.0s to let real work start (mid-loop, before any output is written)...
+[2026-09-04T06:09:17.750+00:00] *** KILLING worker-2 (pid 26608) NOW — taskkill /F, no graceful shutdown ***
+[2026-09-04T06:09:17.919+00:00] kill signal sent at t=3.01s after claim
+[2026-09-04T06:09:17.919+00:00] polling job_state_transitions for recovery (another worker's periodic XPENDING scan must notice the abandoned PEL entry and XCLAIM it)...
+[2026-09-04T06:09:35.264+00:00] job reached terminal state: succeeded
+[2026-09-04T06:09:35.264+00:00] background load generator stopped after submitting 50 filler jobs
+[2026-09-04T06:09:35.266+00:00]   transition: queued -> processing  worker=worker-2  note=None
+[2026-09-04T06:09:35.266+00:00]   transition: processing -> processing  worker=worker-1  note=reclaimed after presumed crash of previous worker (retry attempt 1)
+[2026-09-04T06:09:35.266+00:00]   transition: processing -> succeeded  worker=worker-1  note=side effect written
+[2026-09-04T06:09:35.272+00:00] ======================================================================
+[2026-09-04T06:09:35.273+00:00] RESULT: recovery took 17.51s from kill to terminal state
+[2026-09-04T06:09:35.273+00:00] RESULT: final status = succeeded, attempts = 1
+[2026-09-04T06:09:35.273+00:00] RESULT: side-effect write_count = 1
+[2026-09-04T06:09:35.273+00:00] ======================================================================
+
+Wrote C:\Users\lokes\OneDrive\Documents\SWEE\Distributed Job Processing\docs\failure_injection_recover.json

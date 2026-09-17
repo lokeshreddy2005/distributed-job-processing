@@ -1,0 +1,24 @@
+[2026-09-04T06:09:55.693+00:00] ======================================================================
+[2026-09-04T06:09:55.693+00:00] FAILURE INJECTION EXPERIMENT — scenario=dlq
+[2026-09-04T06:09:55.693+00:00] ======================================================================
+[2026-09-04T06:09:55.693+00:00] background load generator started (filler jobs every 0.4s)
+[2026-09-04T06:09:57.732+00:00] submitted tracked job 6393842b-4c94-4318-8cf0-b88a0458c403 (scenario=dlq, payload={'limit': 4000000, 'force_fail_until_attempt': 99})
+[2026-09-04T06:09:57.732+00:00] waiting for a worker to claim the job (status -> processing)...
+[2026-09-04T06:09:57.811+00:00] job claimed: status=processing worker=worker-3 (t=0.00s, reference point)
+[2026-09-04T06:09:57.817+00:00] resolved worker-3 -> OS pid 22588
+[2026-09-04T06:09:57.817+00:00] sleeping 3.0s to let real work start (mid-loop, before any output is written)...
+[2026-09-04T06:10:00.819+00:00] *** KILLING worker-3 (pid 22588) NOW — taskkill /F, no graceful shutdown ***
+[2026-09-04T06:10:01.023+00:00] kill signal sent at t=3.01s after claim
+[2026-09-04T06:10:01.023+00:00] polling job_state_transitions for recovery (another worker's periodic XPENDING scan must notice the abandoned PEL entry and XCLAIM it)...
+[2026-09-04T06:10:18.763+00:00] job reached terminal state: dead_lettered
+[2026-09-04T06:10:18.763+00:00] background load generator stopped after submitting 51 filler jobs
+[2026-09-04T06:10:18.766+00:00]   transition: queued -> processing  worker=worker-3  note=None
+[2026-09-04T06:10:18.766+00:00]   transition: processing -> processing  worker=worker-2  note=reclaimed after presumed crash of previous worker (retry attempt 1)
+[2026-09-04T06:10:18.766+00:00]   transition: processing -> dead_lettered  worker=worker-2  note=exhausted retries (2/1): prime_calc: forced failure on attempt 2 (after 7674ms of real work)
+[2026-09-04T06:10:18.772+00:00] ======================================================================
+[2026-09-04T06:10:18.772+00:00] RESULT: recovery took 17.94s from kill to terminal state
+[2026-09-04T06:10:18.772+00:00] RESULT: final status = dead_lettered, attempts = 2
+[2026-09-04T06:10:18.772+00:00] RESULT: side-effect write_count = N/A (dead-lettered before any successful write)
+[2026-09-04T06:10:18.772+00:00] ======================================================================
+
+Wrote C:\Users\lokes\OneDrive\Documents\SWEE\Distributed Job Processing\docs\failure_injection_dlq.json
